@@ -138,7 +138,6 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    /* ---------------- Responsive ---------------- */
     @media (max-width: 600px) {
       header h1 { font-size: 28px; }
       .upload-box h2 { font-size: 18px; }
@@ -153,10 +152,8 @@
 
   <main>
     <div class="upload-box">
-      <h2>Videos hochladen & ansehen</h2>
-      <input type="file" id="fileInput" accept="video/*" multiple>
-      <br>
-      <button onclick="addVideos()">Anzeigen</button>
+      <h2>Videos ansehen</h2>
+      <p>Die Videos sind fest eingebunden und bleiben sichtbar</p>
     </div>
 
     <div class="videos" id="videos"></div>
@@ -167,36 +164,40 @@
   </footer>
 
   <script>
-    function addVideos() {
-      const files = document.getElementById('fileInput').files;
-      const container = document.getElementById('videos');
-      container.innerHTML = "";
+    // ----- Liste deiner fest eingebundenen Videos -----
+    const videos = [
+      { src: 'video1.mp4', name: 'Video 1' },
+      { src: 'video2.mp4', name: 'Video 2' },
+      { src: 'video3.mp4', name: 'Video 3' }
+      // Füge hier weitere Videos hinzu
+    ];
 
-      for (let file of files) {
-        const card = document.createElement('div');
-        card.classList.add('video-card');
+    const container = document.getElementById('videos');
 
-        const video = document.createElement('video');
-        video.src = URL.createObjectURL(file);
-        video.controls = true;
+    videos.forEach(file => {
+      const card = document.createElement('div');
+      card.classList.add('video-card');
 
-        video.onloadedmetadata = () => {
-          if (video.videoWidth > video.videoHeight) {
-            video.style.aspectRatio = "16/9";
-          } else {
-            video.style.aspectRatio = "9/16";
-          }
-        };
+      const video = document.createElement('video');
+      video.src = file.src;
+      video.controls = true;
 
-        const info = document.createElement('div');
-        info.classList.add('video-info');
-        info.textContent = file.name;
+      video.onloadedmetadata = () => {
+        if (video.videoWidth > video.videoHeight) {
+          video.style.aspectRatio = "16/9"; // Querformat
+        } else {
+          video.style.aspectRatio = "9/16"; // Hochkant
+        }
+      };
 
-        card.appendChild(video);
-        card.appendChild(info);
-        container.appendChild(card);
-      }
-    }
+      const info = document.createElement('div');
+      info.classList.add('video-info');
+      info.textContent = file.name;
+
+      card.appendChild(video);
+      card.appendChild(info);
+      container.appendChild(card);
+    });
   </script>
 </body>
 </html>
