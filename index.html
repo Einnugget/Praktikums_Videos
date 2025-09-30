@@ -38,65 +38,15 @@
 
     main {
       flex: 1;
-      max-width: 1200px;
+      max-width: 1000px;
       width: 90%;
       margin: 40px auto;
-    }
-
-    /* ---------------- Upload Box ---------------- */
-    .upload-box {
-      background: #12121a;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      text-align: center;
-      margin-bottom: 50px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .upload-box:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-    }
-
-    .upload-box h2 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #f5f5f7;
-    }
-
-    .upload-box input[type="file"] {
-      margin: 15px 0;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      background: #1f1f2c;
-      color: #f5f5f7;
-      font-size: 14px;
-    }
-
-    .upload-box button {
-      background: linear-gradient(90deg, #0ea5e9, #3b82f6);
-      padding: 12px 28px;
-      border-radius: 10px;
-      border: none;
-      color: #fff;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      margin-top: 10px;
-    }
-
-    .upload-box button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
     }
 
     /* ---------------- Video Galerie ---------------- */
     .videos {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 25px;
     }
 
@@ -140,7 +90,6 @@
 
     @media (max-width: 600px) {
       header h1 { font-size: 28px; }
-      .upload-box h2 { font-size: 18px; }
     }
   </style>
 </head>
@@ -151,11 +100,6 @@
   </header>
 
   <main>
-    <div class="upload-box">
-      <h2>Videos ansehen</h2>
-      <p>Die Videos sind fest eingebunden und bleiben sichtbar</p>
-    </div>
-
     <div class="videos" id="videos"></div>
   </main>
 
@@ -164,11 +108,9 @@
   </footer>
 
   <script>
-    // ----- Liste deiner fest eingebundenen Videos -----
+    // ----- Dein fest eingebundenes Video -----
     const videos = [
-      { src: 'Projektname_PV01.mp4', name: 'Video 1' },
-
-      // Füge hier weitere Videos hinzu
+      { src: 'Projektname_PV01.mp4', name: 'Praktikums-Video 1' }
     ];
 
     const container = document.getElementById('videos');
