@@ -38,7 +38,7 @@
 
     main {
       flex: 1;
-      max-width: 1000px;
+      max-width: 1200px;
       width: 90%;
       margin: 40px auto;
     }
@@ -46,21 +46,21 @@
     /* ---------------- Video Galerie ---------------- */
     .videos {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
+      grid-template-columns: 1fr; /* 1 Video pro Zeile für maximale Größe */
+      gap: 40px;
     }
 
     .video-card {
       background: #12121a;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .video-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.7);
     }
 
     video {
@@ -71,8 +71,8 @@
     }
 
     .video-info {
-      padding: 10px 15px;
-      font-size: 14px;
+      padding: 15px 20px;
+      font-size: 16px;
       color: #a0a0b0;
       text-align: left;
     }
@@ -90,6 +90,7 @@
 
     @media (max-width: 600px) {
       header h1 { font-size: 28px; }
+      .video-info { font-size: 14px; }
     }
   </style>
 </head>
