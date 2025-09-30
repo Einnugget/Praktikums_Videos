@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Meine Praktikums-Videos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ---------------- Grundlayout ---------------- */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: "San Francisco", "Inter", Arial, sans-serif;
+      background: #0a0a0f;
+      color: #f5f5f7;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ---------------- Header ---------------- */
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #1c1c2e, #0a0a0f);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      color: #a0a0b0;
+      font-size: 16px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 90%;
+      margin: 40px auto;
+    }
+
+    /* ---------------- Upload Box ---------------- */
+    .upload-box {
+      background: #12121a;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      text-align: center;
+      margin-bottom: 50px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .upload-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    }
+
+    .upload-box h2 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #f5f5f7;
+    }
+
+    .upload-box input[type="file"] {
+      margin: 15px 0;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: #1f1f2c;
+      color: #f5f5f7;
+      font-size: 14px;
+    }
+
+    .upload-box button {
+      background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 10px;
+    }
+
+    .upload-box button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    /* ---------------- Video Galerie ---------------- */
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .video-card {
+      background: #12121a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      background: #000;
+    }
+
+    .video-info {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #a0a0b0;
+      text-align: left;
+    }
+
+    /* ---------------- Footer ---------------- */
+    footer {
+      background: #0a0a0f;
+      color: #555;
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ---------------- Responsive ---------------- */
+    @media (max-width: 600px) {
+      header h1 { font-size: 28px; }
+      .upload-box h2 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Meine Praktikums-Videos</h1>
+    <p>Produziert & geschnitten während meines Schülerpraktikums</p>
+  </header>
+
+  <main>
+    <div class="upload-box">
+      <h2>Videos hochladen & ansehen</h2>
+      <input type="file" id="fileInput" accept="video/*" multiple>
+      <br>
+      <button onclick="addVideos()">Anzeigen</button>
+    </div>
+
+    <div class="videos" id="videos"></div>
+  </main>
+
+  <footer>
+    © 2025 Nuno – Praktikumsprojekt
+  </footer>
+
+  <script>
+    function addVideos() {
+      const files = document.getElementById('fileInput').files;
+      const container = document.getElementById('videos');
+      container.innerHTML = "";
+
+      for (let file of files) {
+        const card = document.createElement('div');
+        card.classList.add('video-card');
+
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.controls = true;
+
+        video.onloadedmetadata = () => {
+          if (video.videoWidth > video.videoHeight) {
+            video.style.aspectRatio = "16/9";
+          } else {
+            video.style.aspectRatio = "9/16";
+          }
+        };
+
+        const info = document.createElement('div');
+        info.classList.add('video-info');
+        info.textContent = file.name;
+
+        card.appendChild(video);
+        card.appendChild(info);
+        container.appendChild(card);
+      }
+    }
+  </script>
+</body>
+</html>
